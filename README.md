@@ -149,4 +149,8 @@ build\install\mephi-oop\bin\mephi-oop.bat      # Windows
 
 72 теста. Кроме обычных unit-тестов есть `FinanceScenarioTest`: он запускает приложение и передаёт ему команды, в том числе пример из задания.
 
-`./gradlew build` вместе с тестами проверяет стиль кода через Checkstyle и строит отчёт о покрытии в `build/reports/jacoco/test/html/index.html`, покрытие около 84%. Те же проверки запускаются в GitHub Actions при каждом push в `main`.
+`./gradlew build` вместе с тестами проверяет стиль кода через Checkstyle и строит отчёт о покрытии от JaCoCo в `build/reports/jacoco/test/html/index.html`. Тестами покрыто около 84% строк:
+
+![Покрытие кода](docs/screenshots/16-coverage.png)
+
+Те же проверки запускаются в GitHub Actions при каждом push в `main`.
