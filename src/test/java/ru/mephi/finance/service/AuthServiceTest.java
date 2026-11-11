@@ -43,6 +43,13 @@ public final class AuthServiceTest {
     }
 
     @Test
+    public void cyrillicLoginIsAccepted() {
+        auth.register("Игорь", "123123");
+
+        assertEquals("Игорь", auth.authenticate("Игорь", "123123").login());
+    }
+
+    @Test
     public void duplicateLoginIsRejected() {
         auth.register("alice", "secret123");
 
@@ -50,7 +57,7 @@ public final class AuthServiceTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"ab", "имя", "with space", "a/b"})
+    @ValueSource(strings = {"ab", "Иг", "with space", "a/b", "a\\b"})
     public void invalidLoginIsRejected(String login) {
         assertThrows(ValidationException.class, () -> auth.register(login, "secret123"));
     }

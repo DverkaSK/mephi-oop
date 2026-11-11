@@ -27,7 +27,7 @@ public final class RegisterCommand implements Command {
 
     @Override
     public List<String> examples() {
-        return List.of("register alice secret123");
+        return List.of("register Игорь 123123");
     }
 
     @Override

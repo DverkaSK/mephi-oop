@@ -28,7 +28,7 @@ public final class LoginCommand implements Command {
 
     @Override
     public List<String> examples() {
-        return List.of("login alice secret123");
+        return List.of("login Игорь 123123");
     }
 
     @Override

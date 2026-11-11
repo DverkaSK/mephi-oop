@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 public final class AuthService {
 
-    private static final Pattern LOGIN = Pattern.compile("[A-Za-z0-9_.-]{3,32}");
+    private static final Pattern LOGIN = Pattern.compile("[\\p{L}\\p{N}_.-]{3,32}");
     private static final int MIN_PASSWORD_LENGTH = 4;
     private static final int MAX_PASSWORD_LENGTH = 64;
 
@@ -56,7 +56,7 @@ public final class AuthService {
     private void validateLogin(String login) {
         if (login == null || !LOGIN.matcher(login).matches()) {
             throw new ValidationException(
-                    "Логин должен состоять из 3-32 символов: латинские буквы, цифры, знаки _ . -");
+                    "Логин должен состоять из 3-32 символов: буквы, цифры, знаки _ . -");
         }
     }
 
