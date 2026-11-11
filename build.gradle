@@ -40,6 +40,16 @@ tasks.withType(JavaCompile).configureEach {
 tasks.withType(Test).configureEach {
     useJUnitPlatform()
     finalizedBy tasks.named('jacocoTestReport')
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+        exceptionFormat = 'full'
+    }
+    afterSuite { descriptor, result ->
+        if (descriptor.parent == null) {
+            println "Tests: ${result.testCount}, passed: ${result.successfulTestCount}, " +
+                    "failed: ${result.failedTestCount}, skipped: ${result.skippedTestCount}"
+        }
+    }
 }
 
 tasks.named('jacocoTestReport', JacocoReport) {

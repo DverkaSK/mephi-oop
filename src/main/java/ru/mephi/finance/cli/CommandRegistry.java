@@ -5,6 +5,7 @@ import ru.mephi.finance.cli.command.AlertsCommand;
 import ru.mephi.finance.cli.command.BalanceCommand;
 import ru.mephi.finance.cli.command.BudgetCommand;
 import ru.mephi.finance.cli.command.CategoryCommand;
+import ru.mephi.finance.cli.command.ClearCommand;
 import ru.mephi.finance.cli.command.ExitCommand;
 import ru.mephi.finance.cli.command.ExportCommand;
 import ru.mephi.finance.cli.command.HelpCommand;
@@ -51,6 +52,7 @@ public final class CommandRegistry {
                 .register(new ExportCommand())
                 .register(new ImportCommand())
                 .register(new SaveCommand())
+                .register(new ClearCommand())
                 .register(new LogoutCommand())
                 .register(new ExitCommand());
     }
