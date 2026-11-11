@@ -1,0 +1,65 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'checkstyle'
+    id 'jacoco'
+}
+
+group = 'ru.mephi'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+dependencies {
+    implementation libs.jackson.databind
+
+    testImplementation platform(libs.junit.bom)
+    testImplementation libs.junit.jupiter
+    testRuntimeOnly libs.junit.platform.launcher
+}
+
+checkstyle {
+    toolVersion = '10.21.4'
+    configFile = rootProject.file('config/checkstyle/checkstyle.xml')
+    maxWarnings = 0
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.compilerArgs.addAll(['-Xlint:all', '-Werror'])
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+    finalizedBy tasks.named('jacocoTestReport')
+}
+
+tasks.named('jacocoTestReport', JacocoReport) {
+    reports {
+        html.required = true
+        xml.required = true
+    }
+}
+
+application {
+    mainClass = 'ru.mephi.finance.FinanceApp'
+    applicationDefaultJvmArgs = ['-Dstdout.encoding=UTF-8', '-Dstderr.encoding=UTF-8']
+}
+
+tasks.named('run', JavaExec) {
+    standardInput = System.in
+}
+
+tasks.named('jar', Jar) {
+    manifest {
+        attributes 'Main-Class': application.mainClass
+    }
+}
